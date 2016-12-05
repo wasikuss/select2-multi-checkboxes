@@ -77,6 +77,7 @@
             container.empty();
 
             if( data.length > 0 ) {
+              this.selection.data( 'select2-data', data );
               container.append( this.opts.formatSelection() );
               this.selection.removeClass( 'select2-default' );
 
@@ -85,11 +86,11 @@
               }
             } else {
               data = null;
+              this.selection.data( 'select2-data', data );
               container.append( this.getPlaceholder() );
               this.selection.addClass( 'select2-default' );
               this.container.removeClass( 'select2-allowclear' );
             }
-            this.selection.data( 'select2-data', data );
 
             var removed = arr_sub( oldData ? oldData : [], data ? data : [] );
 

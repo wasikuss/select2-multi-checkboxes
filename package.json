@@ -1,13 +1,13 @@
 {
   "name": "select2-multi-checkboxes",
-  "homepage": "https://github.com/kutny/select2-multi-checkboxes",
+  "homepage": "https://github.com/wasikuss/select2-multi-checkboxes",
   "author": {
     "name": "wasikuss",
     "url": "https://github.com/wasikuss"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kutny/select2-multi-checkboxes.git"
+    "url": "https://github.com/wasikuss/select2-multi-checkboxes.git"
   },
   "version": "1.0.0"
 }

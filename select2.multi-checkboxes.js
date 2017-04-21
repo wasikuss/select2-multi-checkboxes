@@ -3,154 +3,65 @@
  * - allow to select multi values via normal dropdown control
  * 
  * author      : wasikuss
+ * repo        : https://github.com/wasikuss/select2-multi-checkboxes
  * inspired by : https://github.com/select2/select2/issues/411
  * License     : MIT
  */
- 
-( function( $ ){
-  function arr_sub( a1, a2 ) {
-    var a = [], sub = [];
-    var i;
-    for( i = 0; i < a1.length; i++ ) {
-      a[ a1[ i ] ] = true;
-    }
-    for( i = 0; i < a2.length; i++ ) {
-      if( a[ a2[ i ] ] ) {
-        delete a[ a2[i] ];
+(function($) {
+  var S2MultiCheckboxes = function(options, element) {
+    var self = this;
+    self.options = options;
+    self.$element = $(element);
+    self.select2 = self.$element.select2({
+      allowClear: true,
+      minimumResultsForSearch: -1,
+      placeholder: options.placeholder,
+      closeOnSelect: false,
+      templateSelection: function() {
+        return self.options.templateSelection(self.$element.val() || [], $('option', self.$element).length);
+      },
+      templateResult: function(result) {
+        if (result.loading !== undefined)
+          return result.text;
+        return $('<div>').text(result.text).addClass(self.options.wrapClass);
       }
-    }
-    for( var k in a ) {
-      if( a.hasOwnProperty(k) ){
-      	sub.push( k );
+    }).data('select2');
+    self.select2.$results.off("mouseup").on("mouseup", ".select2-results__option[aria-selected]", (function(self) {
+      return function(evt) {
+        var $this = $(this);
+
+        var data = $this.data('data');
+
+        if ($this.attr('aria-selected') === 'true') {
+          self.trigger('unselect', {
+            originalEvent: evt,
+            data: data
+          });
+          return;
+        }
+
+        self.trigger('select', {
+          originalEvent: evt,
+          data: data
+        });
       }
-    }
-    return sub;
+    })(self.select2));
+    self.$element.attr('multiple', 'multiple').val([]);
   }
 
   $.fn.extend({
     select2MultiCheckboxes: function() {
       var options = $.extend({
         placeholder: 'Choose elements',
-        formatSelection: function( selected, total ) {
+        templateSelection: function(selected, total) {
           return selected.length + ' > ' + total + ' total';
         },
         wrapClass: 'wrap'
-      }, arguments[ 0 ] );
+      }, arguments[0]);
 
       this.each(function() {
-          var s2 = $( this ).select2({
-            msOptions: options,
-            allowClear: true,
-            minimumResultsForSearch: -1,
-            placeholder: options.placeholder,
-            closeOnSelect: false,
-            formatSelection: function() {
-              var select2 = this.element.data( 'select2' );
-              var total = $( 'option', this.element ).length - 1;
-              var data = select2.data();
-              return this.msOptions.formatSelection( data, total );
-            },
-            formatResult: function( item ) {
-              var classes = [ this.msOptions.wrapClass ]; 
-              if( $( item.element[ 0 ] ).hasClass( 'checked' ) ) {
-                classes.push( 'checked' );
-              }
-              return $( '<div>' ).text( item.text ).addClass( classes.join( ' ' ) );
-            }   
-          }).data( 'select2' );
-          s2.onSelect = function( data, options ) {
-            $( data.element[ 0 ] ).toggleClass( 'checked' );
-            var $t = $( options.target );
-            if( !$t.hasClass( this.opts.msOptions.wrapClass ) ) {
-              $t = $( '.' + this.opts.msOptions.wrapClass, $t );
-            }
-            $t.toggleClass( 'checked' );
-
-            var oldData = this.selection.data( 'select2-data' );
-
-            var data = [];
-            $( '.checked', this.select ).each( function() {
-              data.push( $( this ).val() );
-            });
-
-            var container=this.selection.find( '.select2-chosen' );
-            container.empty();
-
-            if( data.length > 0 ) {
-              this.selection.data( 'select2-data', data );
-              container.append( this.opts.formatSelection() );
-              this.selection.removeClass( 'select2-default' );
-
-              if( this.opts.allowClear && this.getPlaceholder() !== undefined ) {
-                this.container.addClass( 'select2-allowclear' );
-              }
-            } else {
-              data = null;
-              this.selection.data( 'select2-data', data );
-              container.append( this.getPlaceholder() );
-              this.selection.addClass( 'select2-default' );
-              this.container.removeClass( 'select2-allowclear' );
-            }
-
-            var removed = arr_sub( oldData ? oldData : [], data ? data : [] );
-
-            this.triggerChange({ added: data, removed: removed });
-            return;
-          };
-          s2.data = ( function( originalData ) {
-            return function( arr ) {
-              if( arguments.length == 1 ) {
-                var selected = {}; 
-                $( arr ).each( function() {
-                  selected[ this.id ] = true;
-                });
-                this.select.find( 'option' ).each( function() {
-                  var $this = $( this );
-                  $this[ selected[ $this.val() ] === true ? 'addClass' : 'removeClass' ]( 'checked' );
-                });
-              }
-              return originalData.apply( this, arguments );
-            };
-          })( s2.data );
-          s2.val = ( function( originalData ) {
-            return function( arr ) {
-              if( arguments.length === 0 ) {
-                var data = [];
-                $( this.data() ).each( function() {
-                  data.push( this.id );
-                });
-                return data;
-              } else {
-                var oldData = this.selection.data( 'select2-data' );
-
-                this.selection.data( 'select2-data', arr );
-                this.selection.removeClass( 'select2-default' );
-
-                if( this.opts.allowClear && this.getPlaceholder() !== undefined ) {
-                  this.container.addClass( 'select2-allowclear' );
-                }
-
-                var removed = arr_sub( oldData ? oldData : [], arr );
-                this.triggerChange({ added: arr, removed: removed });
-                
-                var container = this.selection.find( '.select2-chosen' );
-                container.empty().append( this.opts.formatSelection() );
-                return $( this.select );
-              }
-            };
-          })( s2.val );
-          s2.select.on({
-            change: function( event ) {
-              var i;
-              for( i = 0; i < event.removed.length; i++ ) {
-                $( 'option[value="' + event.removed[i] + '"]', this.select ).removeClass( 'checked' );
-              }
-              for( i = 0; i < event.added.length; i++ ) {
-                $( 'option[value="' + event.added[ i ] + '"]', this.select ).addClass( 'checked' );
-              }
-            }
-          });
+        new S2MultiCheckboxes(options, this);
       });
     }
   });
-})( jQuery );
+})(jQuery);

@@ -11,4 +11,4 @@ With small effort it can be replaced by normal drop down list with checkboxes.
 ![](https://cloud.githubusercontent.com/assets/9192409/20894631/83940e7a-bb16-11e6-8be6-19ddd5ce355f.png)![](https://cloud.githubusercontent.com/assets/9192409/20894652/9bbbcc90-bb16-11e6-8b9d-424760e2de36.png)
 
 ## Docs (comming soon)
-Take look into https://jsfiddle.net/wasikuss/gx93rwnk/ to learn how to use it.
+Take look into https://jsfiddle.net/wasikuss/7ak9skbb/ to learn how to use it.

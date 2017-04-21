@@ -12,6 +12,8 @@
     var self = this;
     self.options = options;
     self.$element = $(element);
+	var values = self.$element.val();
+    self.$element.removeAttr('multiple');
     self.select2 = self.$element.select2({
       allowClear: true,
       minimumResultsForSearch: -1,
@@ -46,7 +48,7 @@
         });
       }
     })(self.select2));
-    self.$element.attr('multiple', 'multiple').val([]);
+    self.$element.attr('multiple', 'multiple').val(values).trigger('change.select2');
   }
 
   $.fn.extend({

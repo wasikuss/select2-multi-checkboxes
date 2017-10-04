@@ -16,7 +16,7 @@
     self.$element.removeAttr('multiple');
     self.select2 = self.$element.select2({
       allowClear: true,
-      minimumResultsForSearch: -1,
+      minimumResultsForSearch: options.minimumResultsForSearch,
       placeholder: options.placeholder,
       closeOnSelect: false,
       templateSelection: function() {
@@ -26,6 +26,14 @@
         if (result.loading !== undefined)
           return result.text;
         return $('<div>').text(result.text).addClass(self.options.wrapClass);
+      },
+      matcher: function(params, data) {
+        var original_matcher = $.fn.select2.defaults.defaults.matcher;
+        var result = original_matcher(params, data);
+        if (result && self.options.searchMatchOptGroups && data.children && result.children && data.children.length != result.children.length) {
+          result.children = data.children;
+        }
+        return result;
       }
     }).data('select2');
     self.select2.$results.off("mouseup").on("mouseup", ".select2-results__option[aria-selected]", (function(self) {
@@ -58,7 +66,9 @@
         templateSelection: function(selected, total) {
           return selected.length + ' > ' + total + ' total';
         },
-        wrapClass: 'wrap'
+        wrapClass: 'wrap',
+        minimumResultsForSearch: -1,
+        searchMatchOptGroups: true
       }, arguments[0]);
 
       this.each(function() {

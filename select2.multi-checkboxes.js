@@ -1,7 +1,7 @@
 /**
  * jQuery Select2 Multi checkboxes
  * - allow to select multi values via normal dropdown control
- * 
+ *
  * author      : wasikuss
  * repo        : https://github.com/wasikuss/select2-multi-checkboxes
  * inspired by : https://github.com/select2/select2/issues/411

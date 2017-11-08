@@ -20,7 +20,7 @@
       placeholder: options.placeholder,
       closeOnSelect: false,
       templateSelection: function() {
-        return self.options.templateSelection(self.$element.val() || [], $('option', self.$element).length);
+        return self.options.templateSelection($('option:selected', self.$element) || [], $('option', self.$element).length);
       },
       templateResult: function(result) {
         if (result.loading !== undefined)

@@ -20,6 +20,8 @@ NOTE: if you're looking for version compatible with Select2 3.5.x use [select2-3
 # Usage
 Take look into `examples` folder to learn how to use it.
 
+NOTE: Examples use select2 repo as a library. Use `git submodules update --init` or simply unpack select2 to `libs/select2`.
+
 # Copyright and license
 The license is available within the repository in the [LICENSE][license] file.
 

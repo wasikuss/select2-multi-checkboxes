@@ -1,0 +1,24 @@
+.multi-checkboxes_wrap:before{
+    font-family:fontAwesome;
+    color:#999;
+    content:"\f096";
+    width:25px;
+    height:25px;
+    padding-right: 10px;
+    
+}
+.multi-checkboxes_wrap[aria-selected=true]:before{
+    content:"\f14a";
+}
+
+/* not required css */
+
+.row
+{
+  padding: 10px;
+}
+
+.select2-multiple, .select2-multiple2
+{
+  width: 50%
+}

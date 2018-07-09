@@ -2,11 +2,13 @@ define([
   'select2/utils',
   'select2/selection/multiple',
   'select2/selection/placeholder',
-  'select2/selection/single'
+  'select2/selection/single',
+  'select2/selection/eventRelay'
 ],
-function (Utils, MultipleSelection, Placeholder, SingleSelection) {
+function (Utils, MultipleSelection, Placeholder, SingleSelection, EventRelay) {
 
   var adapter = Utils.Decorate(MultipleSelection, Placeholder);
+  adapter = Utils.Decorate(adapter, EventRelay);
 
   adapter.prototype.render = function () {
     return SingleSelection.prototype.render.call(this);

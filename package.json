@@ -9,5 +9,17 @@
     "type": "git",
     "url": "https://github.com/wasikuss/select2-multi-checkboxes.git"
   },
-  "version": "2.0.0"
+  "version": "2.0.0",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "eslint": "^4.19.1",
+    "gulp": "^3.9.1",
+    "gulp-append-prepend": "git://github.com/wasikuss/gulp-append-prepend.git#0c0ed34",
+    "gulp-concat": "^2.6.1",
+    "gulp-indent": "^1.0.1",
+    "gulp-rename": "^1.2.3",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^3.0.0",
+    "path": "^0.12.7"
+  }
 }

@@ -1,0 +1,95 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": "eslint:all",
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-var": "off",
+        "one-var": "off",
+        "strict": "off",
+        "func-names": "off",
+        "prefer-arrow-callback": "off",
+        "padded-blocks": [
+            "error",
+            "never"
+        ],
+        "array-element-newline": "off",
+        "max-len": [
+            "warn",
+            120
+        ],
+        "dot-location": [
+            "error",
+            "property"
+        ],
+        "capitalized-comments": "off",
+        "max-params": "off",
+        "new-cap": [
+            "error",
+            {
+                "properties": false
+            }
+        ],
+        "no-underscore-dangle": "off",
+        "no-ternary": "off",
+        "multiline-ternary": [
+            "error",
+            "never"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "object-property-newline": [
+            "error",
+            {
+                "allowMultiplePropertiesPerLine": true
+            }
+        ],
+        "sort-keys": "off",
+        "prefer-template": "off",
+        "function-paren-newline": [
+            "error",
+            "consistent"
+        ],
+        "id-length": "off",
+        "require-jsdoc": "off",
+        "no-magic-numbers": "off",
+        "eqeqeq": [
+            "error",
+            "smart"
+        ],
+        "no-eq-null": "off",
+        "prefer-rest-params": "off",
+        "quote-props": [
+            "error",
+            "consistent"
+        ],
+        "object-shorthand": "off",
+        "func-style": "off",
+        "vars-on-top": "off",
+        "wrap-iife": "error",
+        "prefer-destructuring": "off",
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ]
+    }
+}

@@ -1,18 +1,18 @@
+/* global define */
 define([
   'select2/utils',
   'select2/selection/multiple',
   'select2/selection/placeholder',
   'select2/selection/single'
 ],
-function (Utils, MultipleSelection, Placeholder, SingleSelection) {
-
+function(Utils, MultipleSelection, Placeholder, SingleSelection) {
   var adapter = Utils.Decorate(MultipleSelection, Placeholder);
 
-  adapter.prototype.render = function () {
+  adapter.prototype.render = function() {
     return SingleSelection.prototype.render.call(this);
   };
 
-  adapter.prototype.update = function (data) {
+  adapter.prototype.update = function(data) {
     var $rendered = this.$selection.find('.select2-selection__rendered');
     var formatted = '';
 

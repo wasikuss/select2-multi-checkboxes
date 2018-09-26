@@ -1,20 +1,21 @@
+/* global define */
 define([
   'jquery',
   'select2/utils',
   'select2/results'
 ],
-function ($, Utils, _Results) {
+function($, Utils, _Results) {
   function Results() {
     Results.__super__.constructor.apply(this, arguments);
   }
   Utils.Extend(Results, _Results);
 
-  Results.prototype.highlightFirstItem = function () {
+  Results.prototype.highlightFirstItem = function() {
     this.ensureHighlightVisible();
   };
 
-  Results.prototype.bind = function (container) {
-    container.on('open', function () {
+  Results.prototype.bind = function(container) {
+    container.on('open', function() {
       var $options = this.$results.find('.select2-results__option[aria-selected]');
       var $selected = $options.filter('[aria-selected=true]');
       var $optionToScrollTo = ($selected.length > 0 ? $selected : $selected).first();
@@ -23,7 +24,7 @@ function ($, Utils, _Results) {
     Results.__super__.bind.apply(this, arguments);
   };
 
-  Results.prototype.template = function (result, container) {
+  Results.prototype.template = function(result, container) {
     var template = this.options.get('templateResult');
     var escapeMarkup = this.options.get('escapeMarkup');
 

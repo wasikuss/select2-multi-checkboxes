@@ -8,51 +8,56 @@
  * License     : MIT
  */
 
-(function (factory) {
+/* global define jQuery */
+(function(factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory);
   } else {
     // Browser globals
     factory(jQuery);
   }
-}(function (jQuery) {
+}(function(jQuery) {
   if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) {
     define = jQuery.fn.select2.amd.define;
   }
   var define;
-  define('select2/multi-checkboxes/dropdown', [
-    'select2/utils',
-    'select2/dropdown',
-    'select2/dropdown/search',
-    'select2/dropdown/attachBody'
-  ],
-  function (Utils, Dropdown, DropdownSearch, AttachBody) {
-    return Utils.Decorate(
-      Utils.Decorate(
-        Dropdown,
-        DropdownSearch
-      ),
-      AttachBody
-    );
-  });
+
+  define(
+    'select2/multi-checkboxes/dropdown',
+    [
+      'select2/utils',
+      'select2/dropdown',
+      'select2/dropdown/search',
+      'select2/dropdown/attachBody'
+    ],
+    function(Utils, Dropdown, DropdownSearch, AttachBody) {
+      return Utils.Decorate(
+        Utils.Decorate(
+          Dropdown,
+          DropdownSearch
+        ),
+        AttachBody
+      );
+    }
+  );
 
   define('select2/multi-checkboxes/results', [
     'jquery',
     'select2/utils',
     'select2/results'
   ],
-  function ($, Utils, _Results) {
+  function($, Utils, _Results) {
     function Results() {
       Results.__super__.constructor.apply(this, arguments);
     }
     Utils.Extend(Results, _Results);
 
-    Results.prototype.highlightFirstItem = function () {
+    Results.prototype.highlightFirstItem = function() {
       this.ensureHighlightVisible();
     };
 
-    Results.prototype.bind = function (container) {
-      container.on('open', function () {
+    Results.prototype.bind = function(container) {
+      container.on('open', function() {
         var $options = this.$results.find('.select2-results__option[aria-selected]');
         var $selected = $options.filter('[aria-selected=true]');
         var $optionToScrollTo = ($selected.length > 0 ? $selected : $selected).first();
@@ -61,7 +66,7 @@
       Results.__super__.bind.apply(this, arguments);
     };
 
-    Results.prototype.template = function (result, container) {
+    Results.prototype.template = function(result, container) {
       var template = this.options.get('templateResult');
       var escapeMarkup = this.options.get('escapeMarkup');
 
@@ -86,15 +91,14 @@
     'select2/selection/placeholder',
     'select2/selection/single'
   ],
-  function (Utils, MultipleSelection, Placeholder, SingleSelection) {
-
+  function(Utils, MultipleSelection, Placeholder, SingleSelection) {
     var adapter = Utils.Decorate(MultipleSelection, Placeholder);
 
-    adapter.prototype.render = function () {
+    adapter.prototype.render = function() {
       return SingleSelection.prototype.render.call(this);
     };
 
-    adapter.prototype.update = function (data) {
+    adapter.prototype.update = function(data) {
       var $rendered = this.$selection.find('.select2-selection__rendered');
       var formatted = '';
 

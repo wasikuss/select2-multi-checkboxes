@@ -26,7 +26,7 @@ NOTE: Examples use select2 repo as a library. Use `git submodules update --init`
 The license is available within the repository in the [LICENSE][license] file.
 
 [select2-repo]: https://github.com/select2/select2
-[license]: LICENSE
+[license]: https://github.com/wasikuss/select2-multi-checkboxes/blob/amd/LICENSE
 [select2-3.5.x]: https://github.com/wasikuss/select2-multi-checkboxes/tree/select2-3.5.x
 
 [img-select2]: https://cloud.githubusercontent.com/assets/9192409/20893500/4e4a8d4c-bb12-11e6-9c46-1b90f70aaca8.png

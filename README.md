@@ -3,14 +3,10 @@ Plugin to [select2][select2-repo] allowing multiple selection while retain old g
 
 With small effort it can be replaced by normal dropdown list with checkboxes.
 
-before:
 
-![img-select2]
-
-after:
-
-![img-multicheckboxes-1]
-![img-multicheckboxes-2]
+| before         | after                                            |
+|----------------|--------------------------------------------------|
+| ![img-select2] | ![img-multicheckboxes-1]![img-multicheckboxes-2] |
 
 # Requirements
 * Select2 4.x

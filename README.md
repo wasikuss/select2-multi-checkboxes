@@ -1,3 +1,5 @@
+### Select2 4.0 introduced AMD-based build so this branch will be eventually replaced by [amd](https://github.com/wasikuss/select2-multi-checkboxes/tree/amd)
+
 # select2-multi-checkboxes
 Plugin to select2 (https://github.com/select2/select2) allowing multiple selection while retain old good dropdown.
 

@@ -22,7 +22,7 @@ NOTE: Examples use select2 repo as a library. Use `git submodules update --init`
 Feel free to
 * **contribute** ( [fork][fork] )
 * **report a bug** ( [issue][issues] )
-* **become a pratron** ( [Patreon][lolvl-patreon] )
+* **become a patron** ( [Patreon][lolvl-patreon] )
 
 # Copyright and license
 The license is available within the repository in the [LICENSE][license] file.

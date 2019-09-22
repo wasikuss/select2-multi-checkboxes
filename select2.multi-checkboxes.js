@@ -39,8 +39,9 @@
     self.select2.$results.off("mouseup").on("mouseup", ".select2-results__option[aria-selected]", (function(self) {
       return function(evt) {
         var $this = $(this);
-
-        var data = $this.data('data');
+	
+	const Utils = $.fn.select2.amd.require('select2/utils')
+        var data = Utils.GetData(this, 'data');
 
         if ($this.attr('aria-selected') === 'true') {
           self.trigger('unselect', {

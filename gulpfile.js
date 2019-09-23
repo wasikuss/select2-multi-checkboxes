@@ -16,11 +16,11 @@ var paths = {
   ]
 };
 
-gulp.task('clean', function() {
+function clean() {
   return del(['build/select2.multi-checkboxes*.js']);
-});
+};
 
-gulp.task('build', function() {
+function build() {
   return gulp.src(paths.includes)
     .pipe(replace('define([', function() {
       var pathObj = path.parse(path.relative('src', this.file.path));
@@ -32,13 +32,19 @@ gulp.task('build', function() {
     .pipe(gap.prependFile('build/wrapper.start.js', { trim: false }))
     .pipe(gap.appendFile('build/wrapper.end.js', { trim: false, separator: '' }))
     .pipe(gulp.dest('build'));
-});
+};
 
-gulp.task('minify', ['build'], function() {
+function minify() {
   return gulp.src('build/select2.multi-checkboxes.js')
     .pipe(uglify())
     .pipe(rename('select2.multi-checkboxes.min.js'))
     .pipe(gulp.dest('build'));
-});
+};
 
-gulp.task('default', ['build', 'minify']);
+var build = gulp.series(build, minify);
+
+exports.clean = clean;
+exports.minify = minify;
+exports.build = build;
+
+exports.default = build;

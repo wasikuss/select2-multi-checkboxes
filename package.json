@@ -13,7 +13,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "eslint": "^4.19.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-append-prepend": "git://github.com/wasikuss/gulp-append-prepend.git#0c0ed34",
     "gulp-concat": "^2.6.1",
     "gulp-indent": "^1.0.1",

@@ -14,9 +14,16 @@ function(Utils, MultipleSelection, Placeholder, SingleSelection, EventRelay) {
     return SingleSelection.prototype.render.call(this);
   };
 
+  var defaultFormatTooltipFn = function(data) {
+    return data.selected.map(function(item) {
+      return item.text;
+    }).join(", ")
+  }
+
   adapter.prototype.update = function(data) {
     var $rendered = this.$selection.find('.select2-selection__rendered');
     var formatted = '';
+    var titleFormatted = null;
 
     if (data.length === 0) {
       formatted = this.options.get('placeholder') || '';
@@ -26,10 +33,15 @@ function(Utils, MultipleSelection, Placeholder, SingleSelection, EventRelay) {
         all: this.$element.find('option') || []
       };
       formatted = this.display(itemsData, $rendered);
+      var formatTooltipFn = this.options.get('formatTooltip');
+      if (formatTooltipFn !== null) {
+        formatTooltipFn = formatTooltipFn === true ? defaultFormatTooltipFn : formatTooltipFn;
+        titleFormatted = formatTooltipFn.call(this, itemsData, $rendered);
+      }
     }
 
     $rendered.empty().append(formatted);
-    $rendered.prop('title', formatted);
+    $rendered.prop('title', titleFormatted || formatted);
   };
 
   return adapter;

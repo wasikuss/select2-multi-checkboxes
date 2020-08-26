@@ -15,6 +15,8 @@
 	var values = self.$element.val();
     self.$element.removeAttr('multiple');
     self.select2 = self.$element.select2({
+      dropdownCssClass: options.dropdownCssClass,
+      selectionCssClass: options.selectionCssClass,
       allowClear: true,
       minimumResultsForSearch: options.minimumResultsForSearch,
       placeholder: options.placeholder,
@@ -68,6 +70,8 @@
           return selected.length + ' > ' + total + ' total';
         },
         wrapClass: 'wrap',
+	dropdownCssClass: '',
+	selectionCssClass: '',
         minimumResultsForSearch: -1,
         searchMatchOptGroups: true
       }, arguments[0]);

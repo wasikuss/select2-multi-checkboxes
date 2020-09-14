@@ -19,6 +19,7 @@
       minimumResultsForSearch: options.minimumResultsForSearch,
       placeholder: options.placeholder,
       closeOnSelect: false,
+	  dropdownParent: options.dropdownParent || '',
       templateSelection: function() {
         return self.options.templateSelection(self.$element.val() || [], $('option', self.$element).length);
       },
